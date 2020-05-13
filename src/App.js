@@ -9,7 +9,9 @@ function App() {
   return (
     <ExerciseContextProvider>
       <div className="App">
-        <List />
+        <div className={"container"}>
+          <List />
+        </div>
       </div>
     </ExerciseContextProvider>
   );

@@ -5,7 +5,9 @@ export const ExerciseContext = createContext();
 class ExerciseContextProvider extends Component {
     state = {
         exerciseName: '',
-        exerciseList: []
+        exerciseList: [],
+        noOfExercises: null,
+
     }
 
     handleInput = (e) => {
@@ -13,7 +15,22 @@ class ExerciseContextProvider extends Component {
             exerciseName: e.target.value
         })
         e.preventDefault();
+    }
 
+    handleSubmit = (e) => {
+        this.setState({
+            exerciseName: '',
+            exerciseList: [
+                ...this.state.exerciseList,
+                this.state.exerciseName
+            ]
+        });
+        e.preventDefault();
+    }
+
+    handleNumber = (e) => {
+        this.setState({ noOfExercises: e.target.value });
+        e.preventDefault();
     }
 
     render() {
@@ -21,7 +38,9 @@ class ExerciseContextProvider extends Component {
         return (
             <ExerciseContext.Provider value={{
                 ...this.state,
+                handleSubmit: this.handleSubmit,
                 handleInput: this.handleInput,
+                handleNumber: this.handleNumber,
             }}>
 
                 {this.props.children}
